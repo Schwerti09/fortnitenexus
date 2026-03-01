@@ -575,10 +575,11 @@ function EventsSection() {
       setCounts((prev) =>
         prev.map((c) => {
           let { days, hours, mins, secs } = c;
-          secs++;
-          if (secs >= 60) { secs = 0; mins++; }
-          if (mins >= 60) { mins = 0; hours++; }
-          if (hours >= 24) { hours = 0; days++; }
+          if (days === 0 && hours === 0 && mins === 0 && secs === 0) return c;
+          secs--;
+          if (secs < 0) { secs = 59; mins--; }
+          if (mins < 0) { mins = 59; hours--; }
+          if (hours < 0) { hours = 23; days--; }
           return { days, hours, mins, secs };
         })
       );
