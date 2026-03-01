@@ -375,12 +375,958 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
   );
 }
 
+// ============ HERO SECTION ============
+
+function HeroSection() {
+  const handleShopClick = useCallback(() => {
+    triggerConfetti();
+    document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 pt-20"
+    >
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 30%, rgba(161,0,255,0.15) 0%, transparent 70%), radial-gradient(ellipse at 80% 70%, rgba(0,245,255,0.10) 0%, transparent 60%)",
+        }}
+      />
+      <motion.div
+        className="text-8xl mb-6 z-10"
+        animate={{ y: [0, -15, 0] }}
+        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+      >
+        🚌
+      </motion.div>
+      <motion.h1
+        className="text-6xl md:text-8xl font-black tracking-tighter z-10 mb-4"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        style={{ textShadow: "0 0 60px rgba(161,0,255,0.8), 0 0 120px rgba(0,245,255,0.4)" }}
+      >
+        <span
+          className="text-transparent bg-clip-text"
+          style={{ backgroundImage: "linear-gradient(135deg, #A100FF, #00F5FF, #FF0099)" }}
+        >
+          FORTNEXUS
+        </span>
+        <br />
+        <span className="text-white/90 text-3xl md:text-5xl tracking-tight font-black">
+          CARNIVAL 2026
+        </span>
+      </motion.h1>
+      <motion.p
+        className="text-gray-300 text-lg md:text-xl max-w-2xl z-10 mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        Chapter 7 • Pacific Break | The Ultimate Worldwide Fortnite Hub 2026
+      </motion.p>
+      <motion.div
+        className="flex flex-wrap items-center justify-center gap-4 z-10 mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
+        <motion.button
+          onClick={handleShopClick}
+          className="px-8 py-4 rounded-full text-lg font-black text-black"
+          style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+          whileHover={{ scale: 1.08, boxShadow: "0 0 40px rgba(161,0,255,0.7)" }}
+          whileTap={{ scale: 0.96 }}
+        >
+          🛒 ITEM SHOP EXPLODIEREN
+        </motion.button>
+        <motion.a
+          href="#live"
+          className="px-8 py-4 rounded-full text-lg font-black border-2 border-cyan-400 text-cyan-400"
+          whileHover={{
+            scale: 1.08,
+            boxShadow: "0 0 30px rgba(0,245,255,0.5)",
+            backgroundColor: "rgba(0,245,255,0.1)",
+          }}
+          whileTap={{ scale: 0.96 }}
+        >
+          🔴 LIVE STREAMS
+        </motion.a>
+      </motion.div>
+      <motion.div
+        className="flex flex-wrap justify-center gap-4 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        {[
+          { icon: "🏆", label: "FNCS Finals live" },
+          { icon: "🕒", label: "Shop Reset in 2h 47m" },
+          { icon: "🔥", label: "Neue Skins leaked" },
+        ].map((stat) => (
+          <div
+            key={stat.label}
+            className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10"
+          >
+            <span>{stat.icon}</span>
+            <span className="text-sm font-semibold text-gray-300">{stat.label}</span>
+          </div>
+        ))}
+      </motion.div>
+      <motion.div
+        className="absolute bottom-8 z-10"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+      >
+        <ChevronRight size={28} className="text-cyan-400 rotate-90" />
+      </motion.div>
+    </section>
+  );
+}
+
+// ============ LIVE STREAMS ============
+
+function LiveStreamsSection() {
+  return (
+    <section id="live" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="flex items-center gap-3 mb-10"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+          <h2 className="text-3xl md:text-4xl font-black">
+            LIVE AUF TWITCH &amp; KICK – CARNIVAL STAGE
+          </h2>
+        </motion.div>
+        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+          {TWITCH_STREAMERS.map((s, i) => (
+            <motion.div
+              key={s.name}
+              className="flex-shrink-0 w-72 rounded-2xl overflow-hidden glass border border-white/10"
+              whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(0,245,255,0.2)" }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <div className="relative aspect-video bg-gradient-to-br from-purple-900/50 to-cyan-900/50 flex items-center justify-center">
+                <span className="text-5xl">🎮</span>
+                <div className="absolute top-2 left-2 flex items-center gap-1 bg-red-600 text-white text-xs font-black px-2 py-0.5 rounded">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  LIVE
+                </div>
+                <div className="absolute top-2 right-2 text-xs bg-black/70 text-gray-300 px-2 py-0.5 rounded">
+                  <Eye size={12} className="inline mr-1" />
+                  {s.viewers}
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="font-black text-white text-lg">{s.display}</p>
+                <p className="text-gray-400 text-sm mt-1">FNCS • Pacific Break</p>
+                <a
+                  href={`https://twitch.tv/${s.channel}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 block text-center py-2 rounded-lg text-sm font-bold text-black"
+                  style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+                >
+                  Watch Now
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ ITEM SHOP ============
+
+function ItemShopSection() {
+  const [selectedItem, setSelectedItem] = useState<(typeof SHOP_ITEMS)[0] | null>(null);
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(SHOP_ITEMS.length / itemsPerPage);
+  const visible = SHOP_ITEMS.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+
+  const rarityBorder: Record<string, string> = {
+    Legendary: "border-yellow-500/60",
+    Epic: "border-purple-500/60",
+    Rare: "border-blue-500/60",
+    Uncommon: "border-green-500/60",
+    Common: "border-gray-500/60",
+  };
+
+  return (
+    <section id="shop" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div>
+            <h2 className="text-3xl md:text-4xl font-black">TODAY&apos;S CARNIVAL SHOP</h2>
+            <p className="text-gray-400 text-sm mt-1">01.03.2026 • Daily Rotation</p>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-yellow-500/40">
+            <span className="text-yellow-400 text-xl">⚡</span>
+            <span className="font-black text-yellow-400">
+              V-BUCKS: {SHOP_ITEMS.reduce((a, b) => a + b.vbucks, 0).toLocaleString()}
+            </span>
+          </div>
+        </motion.div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {visible.map((item, i) => (
+            <motion.div
+              key={item.id}
+              className={`relative rounded-2xl overflow-hidden cursor-pointer border-2 ${rarityBorder[item.rarity] ?? "border-white/10"} glass`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.03 }}
+              whileHover={{ scale: 1.07, boxShadow: `0 0 30px ${item.glow}` }}
+              onClick={() => setSelectedItem(item)}
+            >
+              <div
+                className={`aspect-square bg-gradient-to-br ${item.color} flex items-center justify-center`}
+              >
+                <span className="text-4xl">{item.emoji}</span>
+              </div>
+              <div className="p-2">
+                <p className="font-bold text-xs text-white truncate">{item.name}</p>
+                <p className="text-yellow-400 text-xs font-black">⚡ {item.vbucks.toLocaleString()}</p>
+                <p className="text-xs text-gray-400">{item.rarity}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <div className="flex justify-center items-center gap-4 mt-8">
+          <motion.button
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            className="p-2 rounded-full glass border border-white/10 disabled:opacity-30"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ChevronLeft size={20} />
+          </motion.button>
+          <span className="text-gray-400 text-sm">
+            {page + 1} / {totalPages}
+          </span>
+          <motion.button
+            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+            disabled={page === totalPages - 1}
+            className="p-2 rounded-full glass border border-white/10 disabled:opacity-30"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ChevronRight size={20} />
+          </motion.button>
+        </div>
+      </div>
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(10px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedItem(null)}
+          >
+            <motion.div
+              className="relative rounded-3xl glass border border-white/10 p-8 max-w-sm w-full"
+              style={{ boxShadow: `0 0 80px ${selectedItem.glow}` }}
+              initial={{ scale: 0.8, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 30 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+                onClick={() => setSelectedItem(null)}
+              >
+                <X size={24} />
+              </button>
+              <div
+                className={`w-full aspect-square rounded-2xl bg-gradient-to-br ${selectedItem.color} flex items-center justify-center mb-6`}
+              >
+                <span className="text-8xl">{selectedItem.emoji}</span>
+              </div>
+              <h3 className="text-2xl font-black mb-1">{selectedItem.name}</h3>
+              <p className="text-gray-400 mb-2">{selectedItem.rarity} Outfit</p>
+              <div className="flex items-center gap-2 text-yellow-400 font-black text-xl mb-6">
+                <span>⚡</span>
+                <span>{selectedItem.vbucks.toLocaleString()} V-Bucks</span>
+              </div>
+              <motion.button
+                className="w-full py-3 rounded-full font-black text-black"
+                style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  triggerConfetti();
+                  setSelectedItem(null);
+                }}
+              >
+                BUY NOW 🛒
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+// ============ LEAKS ============
+
+function LeaksSection() {
+  const [activeTab, setActiveTab] = useState<"latest" | "leaked">("latest");
+  const displayed =
+    activeTab === "leaked" ? LEAKS.filter((l) => l.hot) : LEAKS.slice(0, 8);
+
+  return (
+    <section id="leaks" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl md:text-4xl font-black mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          NEWS &amp; LEAKS FEED 🔥
+        </motion.h2>
+        <div className="flex gap-3 mb-8">
+          {(["latest", "leaked"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-2 rounded-full font-black text-sm transition-all ${
+                activeTab === tab
+                  ? "text-black"
+                  : "text-gray-400 glass border border-white/10"
+              }`}
+              style={
+                activeTab === tab
+                  ? { background: "linear-gradient(90deg, #A100FF, #00F5FF)" }
+                  : {}
+              }
+            >
+              {tab.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayed.map((leak, i) => (
+            <motion.div
+              key={leak.id}
+              className="rounded-2xl glass border border-white/10 p-6 cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              whileHover={{ scale: 1.03, borderColor: "rgba(161,0,255,0.4)" }}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-2xl">{leak.emoji}</span>
+                  <span
+                    className="text-xs font-black px-2 py-0.5 rounded"
+                    style={{ background: "rgba(161,0,255,0.3)", color: "#A100FF" }}
+                  >
+                    {leak.tag}
+                  </span>
+                  {leak.hot && (
+                    <span className="text-xs font-black px-2 py-0.5 rounded bg-red-500/30 text-red-400">
+                      HOT 🔥
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-gray-500 flex-shrink-0">{leak.date}</span>
+              </div>
+              <h3 className="font-black text-base text-white mb-2">{leak.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{leak.content}</p>
+              <p className="text-xs text-cyan-400 mt-3 font-semibold">via {leak.source}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ STATS & LEADERBOARD ============
+
+function StatsSection() {
+  const stats = [
+    { label: "Total Players", value: "350M+", icon: "👥", color: "from-purple-500 to-violet-600" },
+    { label: "Daily Matches", value: "12.4M", icon: "🎯", color: "from-cyan-500 to-blue-600" },
+    { label: "V-Bucks Spent Today", value: "$2.3M", icon: "⚡", color: "from-yellow-500 to-orange-500" },
+    { label: "Active Creators", value: "48.7K", icon: "📺", color: "from-pink-500 to-rose-600" },
+    { label: "Maps Created", value: "1.2B", icon: "🗺️", color: "from-green-500 to-teal-600" },
+    { label: "FNCS Prize Pool", value: "$30M", icon: "🏆", color: "from-amber-500 to-yellow-600" },
+  ];
+
+  return (
+    <section id="stats" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl md:text-4xl font-black mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          GLOBAL STATS &amp; LEADERBOARD 📊
+        </motion.h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              className="rounded-2xl glass border border-white/10 p-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              whileHover={{ scale: 1.04 }}
+            >
+              <div
+                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center text-2xl mb-3`}
+              >
+                {s.icon}
+              </div>
+              <p className="text-2xl font-black text-white">{s.value}</p>
+              <p className="text-gray-400 text-sm">{s.label}</p>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div
+          className="rounded-2xl glass border border-white/10 overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="p-6 border-b border-white/10">
+            <h3 className="font-black text-xl flex items-center gap-2">
+              <Trophy size={20} className="text-yellow-500" />
+              GLOBAL LEADERBOARD
+            </h3>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="text-gray-500 text-xs font-black border-b border-white/5">
+                  <th className="p-4 text-left">RANK</th>
+                  <th className="p-4 text-left">PLAYER</th>
+                  <th className="p-4 text-right">WINS</th>
+                  <th className="p-4 text-right">K/D</th>
+                  <th className="p-4 text-right">REGION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {LEADERBOARD.map((p, i) => (
+                  <tr
+                    key={p.rank}
+                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
+                    style={{ animationDelay: `${i * 50}ms` }}
+                  >
+                    <td className="p-4">
+                      <div
+                        className={`w-8 h-8 rounded-full bg-gradient-to-br ${p.color} flex items-center justify-center font-black text-sm text-black`}
+                      >
+                        {p.rank}
+                      </div>
+                    </td>
+                    <td className="p-4 font-bold text-white">{p.name}</td>
+                    <td className="p-4 text-right font-black text-cyan-400">
+                      {p.wins.toLocaleString()}
+                    </td>
+                    <td className="p-4 text-right font-black text-purple-400">{p.kd}</td>
+                    <td className="p-4 text-right">
+                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-white/10 text-gray-300">
+                        {p.region}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============ EVENTS ============
+
+function EventsSection() {
+  const [timers, setTimers] = useState(
+    EVENTS.map((e) => ({ days: e.days, hours: e.hours, mins: e.mins, secs: 0 }))
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimers((prev) =>
+        prev.map((t) => {
+          let { days, hours, mins, secs } = t;
+          secs--;
+          if (secs < 0) { secs = 59; mins--; }
+          if (mins < 0) { mins = 59; hours--; }
+          if (hours < 0) { hours = 23; days--; }
+          if (days < 0) { days = 0; hours = 0; mins = 0; secs = 0; }
+          return { days, hours, mins, secs };
+        })
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section id="events" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl md:text-4xl font-black mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          UPCOMING EVENTS 🏆
+        </motion.h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {EVENTS.map((event, i) => (
+            <motion.div
+              key={event.name}
+              className={`rounded-2xl border p-6 bg-gradient-to-br ${event.color} ${event.border} backdrop-blur-xl`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <span className="text-3xl">{event.icon}</span>
+                  <h3 className="font-black text-xl mt-2">{event.name}</h3>
+                  <p className="text-gray-400 text-sm">{event.date}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-gray-400">Prize Pool</p>
+                  <p className="font-black text-yellow-400 text-lg">{event.prize}</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                {[
+                  { label: "DAYS", value: timers[i]?.days ?? event.days },
+                  { label: "HRS", value: timers[i]?.hours ?? event.hours },
+                  { label: "MIN", value: timers[i]?.mins ?? event.mins },
+                  { label: "SEC", value: timers[i]?.secs ?? 0 },
+                ].map((unit) => (
+                  <div key={unit.label} className="flex-1 bg-black/40 rounded-xl p-3 text-center">
+                    <p className="font-black text-2xl text-white">
+                      {String(unit.value).padStart(2, "0")}
+                    </p>
+                    <p className="text-gray-500 text-xs">{unit.label}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ PRO SECTION ============
+
+function ProSection() {
+  const handlePurchase = useCallback(async (productId: string, productName: string) => {
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId: productId, productName }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  return (
+    <section id="pro" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl md:text-4xl font-black mb-3">GO PRO 👑</h2>
+          <p className="text-gray-400 text-lg">Unlock the full FortNexus experience</p>
+        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PRO_PRODUCTS.map((product, i) => (
+            <motion.div
+              key={product.id}
+              className={`relative rounded-3xl glass border p-8 ${
+                product.popular ? "border-purple-500/50" : "border-white/10"
+              }`}
+              style={product.popular ? { boxShadow: `0 0 50px ${product.glow}` } : {}}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              {product.popular && (
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black text-black whitespace-nowrap"
+                  style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+                >
+                  MOST POPULAR
+                </div>
+              )}
+              <div className="text-4xl mb-4">{product.emoji}</div>
+              <h3 className="font-black text-xl mb-1">{product.name}</h3>
+              <div className="flex items-end gap-1 mb-3">
+                <span className="text-4xl font-black text-white">{product.price}</span>
+                <span className="text-gray-400 mb-1">{product.period}</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-6">{product.description}</p>
+              <ul className="space-y-3 mb-8">
+                {product.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-gray-300">
+                    <Zap size={14} className="text-cyan-400 flex-shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <motion.button
+                className={`w-full py-3 rounded-full font-black text-sm text-black bg-gradient-to-r ${product.color}`}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => handlePurchase(product.id, product.name)}
+              >
+                GET {product.name}
+              </motion.button>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ AI ORACLE ============
+
+function AIOracle() {
+  const { messages, sendMessage, status } = useChat();
+  const [oracleInput, setOracleInput] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isLoading = status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const handleOracleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!oracleInput.trim() || isLoading) return;
+    sendMessage({ text: oracleInput });
+    setOracleInput("");
+  };
+
+  return (
+    <section id="oracle" className="py-20 px-4 relative">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl md:text-4xl font-black mb-3">FORTNEXUS AI ORACLE 🔮</h2>
+          <p className="text-gray-400">Powered by Gemini • Ask anything about Fortnite</p>
+        </motion.div>
+        <motion.div
+          className="rounded-3xl glass border border-purple-500/30 overflow-hidden"
+          style={{ boxShadow: "0 0 60px rgba(161,0,255,0.15)" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="h-80 overflow-y-auto p-6 space-y-4">
+            {messages.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                <span className="text-5xl">🔮</span>
+                <p className="text-gray-400 text-sm">
+                  Ask the Oracle about strategies, skins, loadouts, and more!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {["Best loadout rn?", "Which skin to buy?", "How to win FNCS?"].map((s) => (
+                    <button
+                      key={s}
+                      className="px-3 py-1 rounded-full text-xs glass border border-purple-500/30 text-purple-300 hover:border-purple-400 transition-colors"
+                      onClick={() => setOracleInput(s)}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {messages.map((msg) => {
+              const textContent = msg.parts
+                .filter((p): p is { type: "text"; text: string } => p.type === "text")
+                .map((p) => p.text)
+                .join("");
+              return (
+                <div
+                  key={msg.id}
+                  className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  {msg.role === "assistant" && (
+                    <span className="text-xl flex-shrink-0">🔮</span>
+                  )}
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm ${
+                      msg.role === "user"
+                        ? "text-black font-semibold"
+                        : "glass border border-white/10 text-gray-200"
+                    }`}
+                    style={
+                      msg.role === "user"
+                        ? { background: "linear-gradient(90deg, #A100FF, #00F5FF)" }
+                        : {}
+                    }
+                  >
+                    {textContent}
+                  </div>
+                </div>
+              );
+            })}
+            {isLoading && (
+              <div className="flex gap-3 justify-start">
+                <span className="text-xl">🔮</span>
+                <div className="glass border border-white/10 rounded-2xl px-4 py-3">
+                  <Loader2 size={16} className="animate-spin text-purple-400" />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="border-t border-white/10 p-4">
+            <form onSubmit={handleOracleSubmit} className="flex gap-3">
+              <input
+                value={oracleInput}
+                onChange={(e) => setOracleInput(e.target.value)}
+                placeholder="Ask the Oracle... 🎮"
+                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-purple-500/50 transition-colors"
+              />
+              <motion.button
+                type="submit"
+                disabled={isLoading || !oracleInput.trim()}
+                className="p-3 rounded-full text-black disabled:opacity-40"
+                style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Send size={18} />
+              </motion.button>
+            </form>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============ FOOTER ============
+
+function Footer() {
+  const cols = [
+    {
+      title: "Navigation",
+      links: [
+        { label: "Live", href: "#live" },
+        { label: "Shop", href: "#shop" },
+        { label: "Leaks", href: "#leaks" },
+        { label: "Stats", href: "#stats" },
+        { label: "Events", href: "#events" },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { label: "Discord", href: "#" },
+        { label: "Twitter / X", href: "#" },
+        { label: "YouTube", href: "#" },
+        { label: "TikTok", href: "#" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms of Service", href: "#" },
+        { label: "Cookie Settings", href: "#" },
+      ],
+    },
+  ];
+
+  return (
+    <footer className="py-12 px-4 border-t border-white/10">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+          <div>
+            <div className="flex items-center gap-2 font-black text-lg mb-4">
+              <span>⛏️</span>
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+              >
+                FortNexus
+              </span>
+            </div>
+            <p className="text-gray-500 text-sm">
+              The Ultimate Worldwide Fortnite Hub 2026
+            </p>
+          </div>
+          {cols.map((col) => (
+            <div key={col.title}>
+              <h4 className="font-black text-sm text-gray-400 mb-4">{col.title}</h4>
+              <ul className="space-y-2">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      className="text-gray-500 hover:text-cyan-400 text-sm transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-600 text-xs">
+            Made with ❤️ for the Fortnite Community • Not affiliated with Epic Games
+          </p>
+          <p className="text-gray-600 text-xs">© 2026 FortNexus • All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ============ VICTORY ROYALE TOAST ============
+
+function VictoryRoyaleToast() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-4 rounded-2xl font-black text-black"
+          style={{
+            background: "linear-gradient(90deg, #FFD700, #FF8C00)",
+            boxShadow: "0 0 40px rgba(255,215,0,0.5)",
+          }}
+          initial={{ opacity: 0, y: 60, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 60, scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          <Trophy size={24} />
+          <span className="text-lg">VICTORY ROYALE!</span>
+          <button
+            onClick={() => setVisible(false)}
+            className="ml-2 opacity-70 hover:opacity-100"
+          >
+            <X size={18} />
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ============ BACK TO TOP ============
+
+function BackToTopButton() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShow(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.button
+          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full text-black flex items-center justify-center"
+          style={{
+            background: "linear-gradient(135deg, #A100FF, #00F5FF)",
+            boxShadow: "0 0 20px rgba(161,0,255,0.5)",
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          whileHover={{ scale: 1.15, boxShadow: "0 0 30px rgba(161,0,255,0.8)" }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+        >
+          <ArrowUp size={20} />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ============ HOME ============
+
 export default function Home() {
   const onlineCount = useLiveCounter(ONLINE_BASE);
 
   return (
     <main className="bg-black min-h-screen text-white">
+      <ScrollProgressBar />
+      <ParticleBackground />
       <Navbar onlineCount={onlineCount} />
+      <HeroSection />
+      <LiveStreamsSection />
+      <ItemShopSection />
+      <LeaksSection />
+      <StatsSection />
+      <EventsSection />
+      <ProSection />
+      <AIOracle />
+      <Footer />
+      <VictoryRoyaleToast />
+      <BackToTopButton />
     </main>
   );
 }
