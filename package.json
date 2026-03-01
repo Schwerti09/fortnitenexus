@@ -9,11 +9,21 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.34",
+    "@ai-sdk/react": "^3.0.107",
+    "@stripe/stripe-js": "^8.8.0",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/three": "^0.183.1",
+    "ai": "^6.0.105",
+    "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.34.3",
+    "gsap": "^3.14.2",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "stripe": "^20.4.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
