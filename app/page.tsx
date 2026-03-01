@@ -7,15 +7,18 @@ import { useChat } from "@ai-sdk/react";
 
 // ============ CONSTANTS ============
 
-const ONLINE_BASE = 1_834_291;
+const ONLINE_BASE = 2_418_291;
 
 const NAV_LINKS = [
-  { label: "Live", href: "#live" },
-  { label: "Shop", href: "#shop" },
-  { label: "Leaks", href: "#leaks" },
-  { label: "Stats", href: "#stats" },
-  { label: "Events", href: "#events" },
+  { label: "🔴 LIVE", href: "#live" },
+  { label: "SHOP", href: "#shop" },
+  { label: "LEADERBOARDS", href: "#leaderboards" },
+  { label: "CREATIVE", href: "#creative" },
+  { label: "COMMUNITY", href: "#community" },
 ];
+
+const TICKER_TEXT =
+  "🔴 HYPEX: Skull Raider March Crew LIVE • Overwatch Collab 19. März • Peterbot #1 EU • Clix 18k LIVE • New Grace Ashcroft OUT NOW";
 
 const TWITCH_STREAMERS = [
   { name: "clix", display: "Clix", viewers: "47.2K", channel: "clix" },
@@ -67,78 +70,35 @@ const SHOP_ITEMS = [
   { id: 36, name: "Galaxy Burst", vbucks: 2000, rarity: "Legendary", emoji: "🌠", color: "from-blue-600 to-purple-700", glow: "rgba(37,99,235,0.6)" },
 ];
 
-const LEAKS = [
-  { id: 1, source: "HYPEX", title: "New Collab Skins Found in v33.10 Files!", content: "Massive collab incoming — files spotted in the latest update. Could be the biggest one yet this season!", emoji: "🔥", tag: "SKIN LEAK", date: "Feb 28", hot: true },
-  { id: 2, source: "ShiinaBR", title: "Upcoming Chapter 7 Map POI Revealed", content: "New named location spotted in map files. Looks like a massive futuristic city biome replacing the current POI.", emoji: "🗺️", tag: "MAP LEAK", date: "Feb 28", hot: true },
-  { id: 3, source: "HYPEX", title: "New Mythic Weapon Stats Found", content: "A brand new Mythic item is coming with insane stats. Here's everything we know from the game files.", emoji: "⚔️", tag: "WEAPON LEAK", date: "Feb 27", hot: false },
-  { id: 4, source: "FNLeaksAndInfo", title: "New LTM Details Extracted", content: "A new limited-time mode called 'Chaos Protocol' was found with full ruleset in v33.10 files.", emoji: "🎮", tag: "MODE LEAK", date: "Feb 27", hot: true },
-  { id: 5, source: "ShiinaBR", title: "FNCS 2026 Finals Map Leaked", content: "The official FNCS 2026 World Cup Finals map has been found in the game files ahead of the official reveal.", emoji: "🏆", tag: "ESPORTS LEAK", date: "Feb 26", hot: false },
-  { id: 6, source: "HYPEX", title: "New Emote Pack With Music", content: "A bundle of 5 new emotes with custom music tracks was found. One appears to be a collab with a major artist.", emoji: "🎵", tag: "COSMETIC LEAK", date: "Feb 26", hot: false },
-  { id: 7, source: "iFireMonkey", title: "Augments Returning Next Season", content: "Reality Augments are making a comeback in Chapter 7 Season 2 based on string data found in the files.", emoji: "⚡", tag: "GAMEPLAY LEAK", date: "Feb 25", hot: true },
-  { id: 8, source: "ShiinaBR", title: "New Vehicle Type Found in Files", content: "A new driveable vehicle was discovered — appears to be a futuristic hovercraft with a weapon mount.", emoji: "🚗", tag: "VEHICLE LEAK", date: "Feb 25", hot: false },
-  { id: 9, source: "HYPEX", title: "Possible New Season Teaser Art", content: "Unannounced season teaser artwork was found embedded in UI assets. Chapter 7 Season 2 looks insane.", emoji: "🌄", tag: "SEASON LEAK", date: "Feb 24", hot: true },
-  { id: 10, source: "FNLeaksAndInfo", title: "New NPC Quests & Dialogue", content: "Several new NPC characters with unique quests and storyline dialogue were found in the latest build.", emoji: "💬", tag: "STORY LEAK", date: "Feb 24", hot: false },
-  { id: 11, source: "ShiinaBR", title: "Festival Season Pass Tracks", content: "10 new Festival tracks were found in the files, including one that's likely for an upcoming event.", emoji: "🎸", tag: "FESTIVAL LEAK", date: "Feb 23", hot: false },
-  { id: 12, source: "HYPEX", title: "New UEFN Tools & Assets Drop", content: "Major UEFN update assets found — Creative mode is getting a massive toolset expansion soon.", emoji: "🛠️", tag: "CREATIVE LEAK", date: "Feb 23", hot: true },
-];
-
-const LEADERBOARD = [
-  { rank: 1, name: "Bugha", wins: 1024, kd: 18.2, region: "NA", color: "from-yellow-500 to-orange-500" },
-  { rank: 2, name: "Clix", wins: 987, kd: 16.8, region: "NA", color: "from-gray-400 to-gray-300" },
-  { rank: 3, name: "renflexEU", wins: 892, kd: 15.4, region: "EU", color: "from-orange-600 to-yellow-700" },
-  { rank: 4, name: "VortexPro", wins: 856, kd: 24.7, region: "EU", color: "from-blue-500 to-cyan-500" },
-  { rank: 5, name: "Storm_ASIA1", wins: 801, kd: 14.1, region: "ASIA", color: "from-purple-500 to-violet-500" },
-  { rank: 6, name: "NightFox99", wins: 756, kd: 13.9, region: "NA", color: "from-green-500 to-teal-500" },
-  { rank: 7, name: "PrismBR", wins: 712, kd: 12.7, region: "EU", color: "from-pink-500 to-rose-500" },
-  { rank: 8, name: "KaosX_OCE", wins: 689, kd: 19.3, region: "OCE", color: "from-red-500 to-orange-500" },
-  { rank: 9, name: "TacticalEU", wins: 657, kd: 11.8, region: "EU", color: "from-indigo-500 to-blue-500" },
-  { rank: 10, name: "SniperGod_NA", wins: 634, kd: 15.6, region: "NA", color: "from-teal-500 to-cyan-500" },
-];
-
 const PRO_PRODUCTS = [
   {
     id: "pro",
     name: "PRO MEMBERSHIP",
-    price: "$9.99",
+    price: "$4.99",
     period: "/month",
     description: "Full access to all FortNexus premium features",
-    features: ["Ad-free experience", "Advanced stats & analytics", "Early leak access", "Discord VIP role", "Custom profile badge", "Priority AI Oracle access"],
+    features: ["Early Leaks 24h vor allen", "Ad-Free + AI Oracle unlimited", "Private Discord + Coaching"],
     color: "from-purple-600 to-cyan-600",
     glow: "rgba(161,0,255,0.5)",
     popular: true,
     emoji: "👑",
   },
-  {
-    id: "coaching",
-    name: "PRO COACHING",
-    price: "$49.99",
-    period: "/session",
-    description: "1-on-1 session with a top Fortnite pro player",
-    features: ["60-min coaching session", "VOD review included", "Custom improvement plan", "Private Discord access", "Follow-up Q&A", "Ranked push guarantee"],
-    color: "from-yellow-500 to-orange-500",
-    glow: "rgba(245,158,11,0.5)",
-    popular: false,
-    emoji: "🎯",
-  },
-  {
-    id: "guide",
-    name: "STRATEGY GUIDE",
-    price: "$19.99",
-    period: "/lifetime",
-    description: "Ultimate Chapter 7 strategy guide PDF + video series",
-    features: ["120+ page PDF guide", "10 strategy videos", "Map control secrets", "Meta weapon loadouts", "Building & editing drills", "Regular updates"],
-    color: "from-green-500 to-teal-500",
-    glow: "rgba(34,197,94,0.5)",
-    popular: false,
-    emoji: "📚",
-  },
 ];
 
-const EVENTS = [
-  { name: "FNCS Finals 2026", date: "March 15, 2026", prize: "$3,000,000", icon: "🏆", color: "from-yellow-500/30 to-orange-500/30", border: "border-yellow-500/40", days: 14, hours: 6, mins: 22 },
-  { name: "Reload Cup", date: "March 8, 2026", prize: "$500,000", icon: "⚡", color: "from-cyan-500/30 to-blue-500/30", border: "border-cyan-500/40", days: 7, hours: 2, mins: 45 },
-  { name: "Festival Jam", date: "March 20, 2026", prize: "$100,000", icon: "🎵", color: "from-pink-500/30 to-purple-500/30", border: "border-pink-500/40", days: 19, hours: 14, mins: 10 },
-  { name: "Creative Showdown", date: "March 25, 2026", prize: "$250,000", icon: "🎮", color: "from-green-500/30 to-teal-500/30", border: "border-green-500/40", days: 24, hours: 8, mins: 30 },
+const EU_LEADERBOARD = [
+  { rank: 1, name: "Peterbot", wins: "2.847", region: "EU" },
+  { rank: 2, name: "Clix", wins: "2.134", region: "EU" },
+  { rank: 3, name: "faxuty", wins: "1.987", region: "EU" },
+];
+
+const NA_LEADERBOARD = [
+  { rank: 1, name: "SypherPK", kd: "14.8", region: "NA" },
+  { rank: 2, name: "NickEh30", kd: "12.3", region: "NA" },
+];
+
+const CREATIVE_MAPS = [
+  { name: "Realistic 1v1 / 4v4", code: "7950-6306-4857", emoji: "⚔️" },
+  { name: "Sniper One Shot", code: "6078-7811-0032", emoji: "🎯" },
 ];
 
 // ============ UTILS ============
@@ -289,7 +249,7 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
           className="flex items-center gap-2 font-black text-xl"
           whileHover={{ scale: 1.05 }}
         >
-          <span className="text-2xl">⛏️</span>
+          <span className="text-2xl">🎡</span>
           <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #A100FF, #00F5FF)" }}>
             FortNexus
           </span>
@@ -321,7 +281,7 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
             whileTap={{ scale: 0.95 }}
           >
             <Star size={14} />
-            PRO
+            PRO $4.99
           </motion.button>
 
           <button
@@ -375,6 +335,25 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
   );
 }
 
+// ============ NEWS TICKER ============
+
+function NewsTicker() {
+  return (
+    <div className="relative w-full overflow-hidden bg-black/60 border-y border-white/10 py-2 z-40">
+      <div className="flex gap-0 whitespace-nowrap" style={{ animation: "tickerScroll 30s linear infinite" }}>
+        <span className="pr-16 text-sm font-semibold text-gray-300">{TICKER_TEXT}</span>
+        <span className="pr-16 text-sm font-semibold text-gray-300">{TICKER_TEXT}</span>
+      </div>
+      <style>{`
+        @keyframes tickerScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 // ============ HERO SECTION ============
 
 function HeroSection() {
@@ -413,7 +392,7 @@ function HeroSection() {
           className="text-transparent bg-clip-text"
           style={{ backgroundImage: "linear-gradient(135deg, #A100FF, #00F5FF, #FF0099)" }}
         >
-          FORTNEXUS
+          FORTNITE
         </span>
         <br />
         <span className="text-white/90 text-3xl md:text-5xl tracking-tight font-black">
@@ -441,7 +420,7 @@ function HeroSection() {
           whileHover={{ scale: 1.08, boxShadow: "0 0 40px rgba(161,0,255,0.7)" }}
           whileTap={{ scale: 0.96 }}
         >
-          🛒 ITEM SHOP EXPLODIEREN
+          SHOP JETZT EXPLODIEREN 💥
         </motion.button>
         <motion.a
           href="#live"
@@ -690,95 +669,16 @@ function ItemShopSection() {
 
 // ============ LEAKS ============
 
-function LeaksSection() {
-  const [activeTab, setActiveTab] = useState<"latest" | "leaked">("latest");
-  const displayed =
-    activeTab === "leaked" ? LEAKS.filter((l) => l.hot) : LEAKS.slice(0, 8);
-
-  return (
-    <section id="leaks" className="py-20 px-4 relative">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2
-          className="text-3xl md:text-4xl font-black mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          NEWS &amp; LEAKS FEED 🔥
-        </motion.h2>
-        <div className="flex gap-3 mb-8">
-          {(["latest", "leaked"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full font-black text-sm transition-all ${
-                activeTab === tab
-                  ? "text-black"
-                  : "text-gray-400 glass border border-white/10"
-              }`}
-              style={
-                activeTab === tab
-                  ? { background: "linear-gradient(90deg, #A100FF, #00F5FF)" }
-                  : {}
-              }
-            >
-              {tab.toUpperCase()}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayed.map((leak, i) => (
-            <motion.div
-              key={leak.id}
-              className="rounded-2xl glass border border-white/10 p-6 cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              whileHover={{ scale: 1.03, borderColor: "rgba(161,0,255,0.4)" }}
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-2xl">{leak.emoji}</span>
-                  <span
-                    className="text-xs font-black px-2 py-0.5 rounded"
-                    style={{ background: "rgba(161,0,255,0.3)", color: "#A100FF" }}
-                  >
-                    {leak.tag}
-                  </span>
-                  {leak.hot && (
-                    <span className="text-xs font-black px-2 py-0.5 rounded bg-red-500/30 text-red-400">
-                      HOT 🔥
-                    </span>
-                  )}
-                </div>
-                <span className="text-xs text-gray-500 flex-shrink-0">{leak.date}</span>
-              </div>
-              <h3 className="font-black text-base text-white mb-2">{leak.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{leak.content}</p>
-              <p className="text-xs text-cyan-400 mt-3 font-semibold">via {leak.source}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============ STATS & LEADERBOARD ============
-
-function StatsSection() {
-  const stats = [
-    { label: "Total Players", value: "350M+", icon: "👥", color: "from-purple-500 to-violet-600" },
-    { label: "Daily Matches", value: "12.4M", icon: "🎯", color: "from-cyan-500 to-blue-600" },
-    { label: "V-Bucks Spent Today", value: "$2.3M", icon: "⚡", color: "from-yellow-500 to-orange-500" },
-    { label: "Active Creators", value: "48.7K", icon: "📺", color: "from-pink-500 to-rose-600" },
-    { label: "Maps Created", value: "1.2B", icon: "🗺️", color: "from-green-500 to-teal-600" },
-    { label: "FNCS Prize Pool", value: "$30M", icon: "🏆", color: "from-amber-500 to-yellow-600" },
+function CommunitySection() {
+  const clips = [
+    { id: 1, title: "Insane Box Fight Clutch", author: "VortexPro", views: "2.3M", emoji: "🎬" },
+    { id: 2, title: "200IQ Build Play", author: "StormRider", views: "1.8M", emoji: "🏗️" },
+    { id: 3, title: "Snipe of the Year", author: "SniperGod_NA", views: "4.1M", emoji: "🎯" },
+    { id: 4, title: "Last Circle 1v3 Win", author: "Bugha", views: "3.5M", emoji: "🏆" },
   ];
 
   return (
-    <section id="stats" className="py-20 px-4 relative">
+    <section id="community" className="py-20 px-4 relative">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-black mb-10"
@@ -786,113 +686,40 @@ function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          GLOBAL STATS &amp; LEADERBOARD 📊
+          COMMUNITY CLIPS – VIRAL MOMENTS
         </motion.h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
-          {stats.map((s, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {clips.map((clip, i) => (
             <motion.div
-              key={s.label}
-              className="rounded-2xl glass border border-white/10 p-6"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={clip.id}
+              className="rounded-2xl glass border border-white/10 overflow-hidden cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              whileHover={{ scale: 1.04 }}
+              whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(0,245,255,0.2)" }}
             >
-              <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center text-2xl mb-3`}
-              >
-                {s.icon}
+              <div className="aspect-video bg-gradient-to-br from-purple-900/60 to-cyan-900/60 flex items-center justify-center">
+                <span className="text-5xl">{clip.emoji}</span>
               </div>
-              <p className="text-2xl font-black text-white">{s.value}</p>
-              <p className="text-gray-400 text-sm">{s.label}</p>
+              <div className="p-4">
+                <p className="font-black text-white text-sm mb-1">{clip.title}</p>
+                <p className="text-gray-400 text-xs">by {clip.author}</p>
+                <p className="text-cyan-400 text-xs font-bold mt-1">👁 {clip.views} views</p>
+              </div>
             </motion.div>
           ))}
         </div>
-        <motion.div
-          className="rounded-2xl glass border border-white/10 overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="p-6 border-b border-white/10">
-            <h3 className="font-black text-xl flex items-center gap-2">
-              <Trophy size={20} className="text-yellow-500" />
-              GLOBAL LEADERBOARD
-            </h3>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-gray-500 text-xs font-black border-b border-white/5">
-                  <th className="p-4 text-left">RANK</th>
-                  <th className="p-4 text-left">PLAYER</th>
-                  <th className="p-4 text-right">WINS</th>
-                  <th className="p-4 text-right">K/D</th>
-                  <th className="p-4 text-right">REGION</th>
-                </tr>
-              </thead>
-              <tbody>
-                {LEADERBOARD.map((p, i) => (
-                  <tr
-                    key={p.rank}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
-                    style={{ animationDelay: `${i * 50}ms` }}
-                  >
-                    <td className="p-4">
-                      <div
-                        className={`w-8 h-8 rounded-full bg-gradient-to-br ${p.color} flex items-center justify-center font-black text-sm text-black`}
-                      >
-                        {p.rank}
-                      </div>
-                    </td>
-                    <td className="p-4 font-bold text-white">{p.name}</td>
-                    <td className="p-4 text-right font-black text-cyan-400">
-                      {p.wins.toLocaleString()}
-                    </td>
-                    <td className="p-4 text-right font-black text-purple-400">{p.kd}</td>
-                    <td className="p-4 text-right">
-                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-white/10 text-gray-300">
-                        {p.region}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 }
 
-// ============ EVENTS ============
+// ============ LEADERBOARDS ============
 
-function EventsSection() {
-  const [timers, setTimers] = useState(
-    EVENTS.map((e) => ({ days: e.days, hours: e.hours, mins: e.mins, secs: 0 }))
-  );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimers((prev) =>
-        prev.map((t) => {
-          let { days, hours, mins, secs } = t;
-          secs--;
-          if (secs < 0) { secs = 59; mins--; }
-          if (mins < 0) { mins = 59; hours--; }
-          if (hours < 0) { hours = 23; days--; }
-          if (days < 0) { days = 0; hours = 0; mins = 0; secs = 0; }
-          return { days, hours, mins, secs };
-        })
-      );
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
+function LeaderboardSection() {
   return (
-    <section id="events" className="py-20 px-4 relative">
+    <section id="leaderboards" className="py-20 px-4 relative">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-black mb-10"
@@ -900,45 +727,119 @@ function EventsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          UPCOMING EVENTS 🏆
+          GLOBAL LEADERBOARDS 🔥
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {EVENTS.map((event, i) => (
+          <motion.div
+            className="rounded-2xl glass border border-white/10 overflow-hidden"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-6 border-b border-white/10">
+              <h3 className="font-black text-xl flex items-center gap-2">
+                <Trophy size={20} className="text-yellow-500" />
+                EU WINS THIS WEEK
+              </h3>
+            </div>
+            <ul className="divide-y divide-white/5">
+              {EU_LEADERBOARD.map((p) => (
+                <li key={p.rank} className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="w-8 h-8 rounded-full flex items-center justify-center font-black text-sm text-black"
+                      style={{
+                        background: p.rank === 1
+                          ? "linear-gradient(135deg,#FFD700,#FF8C00)"
+                          : p.rank === 2
+                          ? "linear-gradient(135deg,#C0C0C0,#A0A0A0)"
+                          : "linear-gradient(135deg,#CD7F32,#A0522D)",
+                      }}
+                    >
+                      {p.rank}
+                    </span>
+                    <span className="font-bold text-white">{p.name}</span>
+                  </div>
+                  <span className="font-black text-cyan-400">{p.wins} Wins</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+          <motion.div
+            className="rounded-2xl glass border border-white/10 overflow-hidden"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="p-6 border-b border-white/10">
+              <h3 className="font-black text-xl flex items-center gap-2">
+                <Trophy size={20} className="text-purple-400" />
+                NA K/D THIS SEASON
+              </h3>
+            </div>
+            <ul className="divide-y divide-white/5">
+              {NA_LEADERBOARD.map((p) => (
+                <li key={p.rank} className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="w-8 h-8 rounded-full flex items-center justify-center font-black text-sm text-black"
+                      style={{
+                        background: p.rank === 1
+                          ? "linear-gradient(135deg,#FFD700,#FF8C00)"
+                          : "linear-gradient(135deg,#C0C0C0,#A0A0A0)",
+                      }}
+                    >
+                      {p.rank}
+                    </span>
+                    <span className="font-bold text-white">{p.name}</span>
+                  </div>
+                  <span className="font-black text-purple-400">{p.kd} K/D</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============ CREATIVE HUB ============
+
+function CreativeSection() {
+  return (
+    <section id="creative" className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl md:text-4xl font-black mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          CREATIVE CARNIVAL HUB – BEST MAPS RIGHT NOW
+        </motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {CREATIVE_MAPS.map((map, i) => (
             <motion.div
-              key={event.name}
-              className={`rounded-2xl border p-6 bg-gradient-to-br ${event.color} ${event.border} backdrop-blur-xl`}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={map.code}
+              className="rounded-2xl glass border border-white/10 p-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(161,0,255,0.2)" }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <span className="text-3xl">{event.icon}</span>
-                  <h3 className="font-black text-xl mt-2">{event.name}</h3>
-                  <p className="text-gray-400 text-sm">{event.date}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-gray-400">Prize Pool</p>
-                  <p className="font-black text-yellow-400 text-lg">{event.prize}</p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                {[
-                  { label: "DAYS", value: timers[i]?.days ?? event.days },
-                  { label: "HRS", value: timers[i]?.hours ?? event.hours },
-                  { label: "MIN", value: timers[i]?.mins ?? event.mins },
-                  { label: "SEC", value: timers[i]?.secs ?? 0 },
-                ].map((unit) => (
-                  <div key={unit.label} className="flex-1 bg-black/40 rounded-xl p-3 text-center">
-                    <p className="font-black text-2xl text-white">
-                      {String(unit.value).padStart(2, "0")}
-                    </p>
-                    <p className="text-gray-500 text-xs">{unit.label}</p>
-                  </div>
-                ))}
-              </div>
+              <div className="text-4xl mb-4">{map.emoji}</div>
+              <h3 className="font-black text-xl text-white mb-2">{map.name}</h3>
+              <p className="text-cyan-400 font-mono text-sm mb-4">{map.code}</p>
+              <motion.button
+                className="px-6 py-2 rounded-full font-black text-sm text-black"
+                style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                PLAY NOW
+              </motion.button>
             </motion.div>
           ))}
         </div>
@@ -973,38 +874,23 @@ function ProSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-black mb-3">GO PRO 👑</h2>
+          <h2 className="text-3xl md:text-4xl font-black mb-3">Werde FortNexus PRO</h2>
           <p className="text-gray-400 text-lg">Unlock the full FortNexus experience</p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-1 max-w-md mx-auto gap-6">
           {PRO_PRODUCTS.map((product, i) => (
             <motion.div
               key={product.id}
-              className={`relative rounded-3xl glass border p-8 ${
-                product.popular ? "border-purple-500/50" : "border-white/10"
-              }`}
-              style={product.popular ? { boxShadow: `0 0 50px ${product.glow}` } : {}}
+              className="relative rounded-3xl glass border border-purple-500/50 p-8"
+              style={{ boxShadow: `0 0 50px ${product.glow}` }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ scale: 1.03 }}
             >
-              {product.popular && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-black text-black whitespace-nowrap"
-                  style={{ background: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
-                >
-                  MOST POPULAR
-                </div>
-              )}
               <div className="text-4xl mb-4">{product.emoji}</div>
               <h3 className="font-black text-xl mb-1">{product.name}</h3>
-              <div className="flex items-end gap-1 mb-3">
-                <span className="text-4xl font-black text-white">{product.price}</span>
-                <span className="text-gray-400 mb-1">{product.period}</span>
-              </div>
-              <p className="text-gray-400 text-sm mb-6">{product.description}</p>
               <ul className="space-y-3 mb-8">
                 {product.features.map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-gray-300">
@@ -1019,7 +905,7 @@ function ProSection() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => handlePurchase(product.id, product.name)}
               >
-                GET {product.name}
+                JETZT PRO $4.99/MO – 7 Tage gratis
               </motion.button>
             </motion.div>
           ))}
@@ -1160,11 +1046,11 @@ function Footer() {
     {
       title: "Navigation",
       links: [
-        { label: "Live", href: "#live" },
-        { label: "Shop", href: "#shop" },
-        { label: "Leaks", href: "#leaks" },
-        { label: "Stats", href: "#stats" },
-        { label: "Events", href: "#events" },
+        { label: "🔴 LIVE", href: "#live" },
+        { label: "SHOP", href: "#shop" },
+        { label: "LEADERBOARDS", href: "#leaderboards" },
+        { label: "CREATIVE", href: "#creative" },
+        { label: "COMMUNITY", href: "#community" },
       ],
     },
     {
@@ -1192,7 +1078,7 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div>
             <div className="flex items-center gap-2 font-black text-lg mb-4">
-              <span>⛏️</span>
+              <span>🎡</span>
               <span
                 className="text-transparent bg-clip-text"
                 style={{ backgroundImage: "linear-gradient(90deg, #A100FF, #00F5FF)" }}
@@ -1316,12 +1202,13 @@ export default function Home() {
       <ScrollProgressBar />
       <ParticleBackground />
       <Navbar onlineCount={onlineCount} />
+      <NewsTicker />
       <HeroSection />
       <LiveStreamsSection />
       <ItemShopSection />
-      <LeaksSection />
-      <StatsSection />
-      <EventsSection />
+      <LeaderboardSection />
+      <CreativeSection />
+      <CommunitySection />
       <ProSection />
       <AIOracle />
       <Footer />
