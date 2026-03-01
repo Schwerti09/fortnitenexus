@@ -172,7 +172,7 @@ function useLiveCounter(base: number) {
   const [count, setCount] = useState(base);
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount((prev) => prev + Math.floor(Math.random() * 50) - 15);
+      setCount((prev) => Math.max(base, prev + Math.floor(Math.random() * 50) - 15));
     }, 2000);
     return () => clearInterval(interval);
   }, []);

@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripeKey = process.env.STRIPE_SECRET_KEY;
-if (!stripeKey) {
-  throw new Error("STRIPE_SECRET_KEY environment variable is not set");
-}
-
-const stripe = new Stripe(stripeKey, {
-  apiVersion: "2026-02-25.clover",
-});
-
 export async function POST(req: NextRequest) {
+  const stripeKey = process.env.STRIPE_SECRET_KEY;
+  if (!stripeKey) {
+    return NextResponse.json({ error: "Stripe not configured" }, { status: 500 });
+  }
+
+  const stripe = new Stripe(stripeKey, {
+    apiVersion: "2026-02-25.clover",
+  });
+
   try {
     const { priceId, productName } = await req.json();
 
@@ -30,8 +30,8 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}?canceled=true`,
+      success_url: `${req.nextUrl.origin}?success=true`,
+      cancel_url: `${req.nextUrl.origin}?canceled=true`,
     });
 
     return NextResponse.json({ url: session.url });
