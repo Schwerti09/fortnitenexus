@@ -12,62 +12,65 @@ const ONLINE_BASE = 2_418_291;
 const NAV_LINKS = [
   { label: "🔴 LIVE", href: "#live" },
   { label: "SHOP", href: "#shop" },
-  { label: "LEADERBOARDS", href: "#leaderboards" },
-  { label: "CREATIVE", href: "#creative" },
-  { label: "COMMUNITY", href: "#community" },
+  { label: "LEAKS", href: "#leaderboards" },
+  { label: "PRO", href: "#pro" },
 ];
 
 const TICKER_TEXT =
   "🔴 HYPEX: Skull Raider March Crew LIVE • Overwatch Collab 19. März • Peterbot #1 EU • Clix 18k LIVE • New Grace Ashcroft OUT NOW";
 
 const TWITCH_STREAMERS = [
-  { name: "clix", display: "Clix", viewers: "47.2K", channel: "clix" },
-  { name: "sypherpk", display: "SypherPK", viewers: "31.8K", channel: "sypherpk" },
-  { name: "mongraal", display: "Mongraal", viewers: "18.9K", channel: "mongraal" },
-  { name: "nickeh30", display: "NickEh30", viewers: "29.4K", channel: "nickeh30" },
-  { name: "faxuty", display: "faxuty", viewers: "23.1K", channel: "faxuty" },
-  { name: "mrsavage", display: "MrSavage", viewers: "15.7K", channel: "mrsavage" },
-  { name: "ninja", display: "Ninja", viewers: "42.1K", channel: "ninja" },
-  { name: "fortnitegame", display: "Fortnite", viewers: "88.3K", channel: "fortnitegame" },
+  { name: "clix", display: "Clix", viewers: "19.4K", channel: "clix", tag: "Last Season Push" },
+  { name: "happyhappygal", display: "HappyHappyGal", viewers: "14.2K", channel: "happyhappygal", tag: "Carnival Vibes" },
+  { name: "faxuty", display: "faxuty", viewers: "11.8K", channel: "faxuty", tag: "FNCS Grind" },
+  { name: "sypherpk", display: "SypherPK", viewers: "31.8K", channel: "sypherpk", tag: "Pacific Break" },
+  { name: "mongraal", display: "Mongraal", viewers: "18.9K", channel: "mongraal", tag: "Chapter 7" },
+  { name: "nickeh30", display: "NickEh30", viewers: "29.4K", channel: "nickeh30", tag: "Carnival Mode" },
+  { name: "ninja", display: "Ninja", viewers: "42.1K", channel: "ninja", tag: "Pacific Break" },
+  { name: "fortnitegame", display: "Fortnite", viewers: "88.3K", channel: "fortnitegame", tag: "Official" },
 ];
 
 const SHOP_ITEMS = [
-  { id: 1, name: "Galactic Storm", vbucks: 2000, rarity: "Legendary", emoji: "🌌", color: "from-yellow-500 to-orange-500", glow: "rgba(251,191,36,0.6)" },
-  { id: 2, name: "Neon Rider", vbucks: 1500, rarity: "Epic", emoji: "⚡", color: "from-purple-500 to-violet-500", glow: "rgba(168,85,247,0.6)" },
-  { id: 3, name: "Ocean Surge", vbucks: 1200, rarity: "Rare", emoji: "🌊", color: "from-blue-500 to-cyan-500", glow: "rgba(59,130,246,0.6)" },
-  { id: 4, name: "Acid Dreams", vbucks: 800, rarity: "Uncommon", emoji: "🧪", color: "from-green-500 to-emerald-500", glow: "rgba(34,197,94,0.6)" },
-  { id: 5, name: "Phantom X", vbucks: 2000, rarity: "Legendary", emoji: "👻", color: "from-amber-500 to-yellow-500", glow: "rgba(245,158,11,0.6)" },
-  { id: 6, name: "Cyber Punk", vbucks: 1500, rarity: "Epic", emoji: "🤖", color: "from-pink-500 to-rose-500", glow: "rgba(236,72,153,0.6)" },
-  { id: 7, name: "Void Walker", vbucks: 1200, rarity: "Rare", emoji: "🕳️", color: "from-indigo-500 to-blue-500", glow: "rgba(99,102,241,0.6)" },
-  { id: 8, name: "Solar Strike", vbucks: 500, rarity: "Common", emoji: "☀️", color: "from-gray-500 to-slate-500", glow: "rgba(107,114,128,0.6)" },
-  { id: 9, name: "Storm Rider", vbucks: 2000, rarity: "Legendary", emoji: "⛈️", color: "from-yellow-500 to-amber-500", glow: "rgba(234,179,8,0.6)" },
-  { id: 10, name: "Pixel Bash", vbucks: 1500, rarity: "Epic", emoji: "🎮", color: "from-cyan-500 to-teal-500", glow: "rgba(6,182,212,0.6)" },
-  { id: 11, name: "Coral Knight", vbucks: 1200, rarity: "Rare", emoji: "🪸", color: "from-red-500 to-rose-500", glow: "rgba(239,68,68,0.6)" },
-  { id: 12, name: "Ghost Rider", vbucks: 800, rarity: "Uncommon", emoji: "💀", color: "from-slate-500 to-zinc-500", glow: "rgba(100,116,139,0.6)" },
-  { id: 13, name: "Dark Matter", vbucks: 2000, rarity: "Legendary", emoji: "🌑", color: "from-purple-600 to-black", glow: "rgba(147,51,234,0.6)" },
-  { id: 14, name: "Frost Nova", vbucks: 1500, rarity: "Epic", emoji: "❄️", color: "from-sky-400 to-blue-600", glow: "rgba(56,189,248,0.6)" },
-  { id: 15, name: "Blaze Runner", vbucks: 1200, rarity: "Rare", emoji: "🔥", color: "from-orange-500 to-red-600", glow: "rgba(249,115,22,0.6)" },
-  { id: 16, name: "Neon Shadow", vbucks: 800, rarity: "Uncommon", emoji: "🌃", color: "from-violet-500 to-purple-700", glow: "rgba(139,92,246,0.6)" },
-  { id: 17, name: "Crystal Core", vbucks: 2000, rarity: "Legendary", emoji: "💎", color: "from-teal-400 to-cyan-600", glow: "rgba(20,184,166,0.6)" },
-  { id: 18, name: "Thunder Bolt", vbucks: 1500, rarity: "Epic", emoji: "⚡", color: "from-yellow-400 to-amber-600", glow: "rgba(250,204,21,0.6)" },
-  { id: 19, name: "Star Chaser", vbucks: 1200, rarity: "Rare", emoji: "⭐", color: "from-fuchsia-500 to-pink-600", glow: "rgba(217,70,239,0.6)" },
-  { id: 20, name: "Iron Titan", vbucks: 500, rarity: "Common", emoji: "🤖", color: "from-gray-400 to-zinc-600", glow: "rgba(156,163,175,0.6)" },
-  { id: 21, name: "Lava King", vbucks: 2000, rarity: "Legendary", emoji: "🌋", color: "from-red-600 to-orange-700", glow: "rgba(220,38,38,0.6)" },
-  { id: 22, name: "Shadow Ops", vbucks: 1500, rarity: "Epic", emoji: "🥷", color: "from-gray-700 to-slate-900", glow: "rgba(55,65,81,0.6)" },
-  { id: 23, name: "Aqua Force", vbucks: 800, rarity: "Uncommon", emoji: "💧", color: "from-blue-400 to-teal-500", glow: "rgba(96,165,250,0.6)" },
-  { id: 24, name: "Hyper Nova", vbucks: 2000, rarity: "Legendary", emoji: "💥", color: "from-fuchsia-500 to-violet-600", glow: "rgba(192,38,211,0.6)" },
-  { id: 25, name: "Cryo Tech", vbucks: 1200, rarity: "Rare", emoji: "🧊", color: "from-sky-300 to-indigo-500", glow: "rgba(125,211,252,0.6)" },
-  { id: 26, name: "Ember Strike", vbucks: 1500, rarity: "Epic", emoji: "🔥", color: "from-amber-400 to-red-500", glow: "rgba(251,191,36,0.6)" },
-  { id: 27, name: "Midnight Ace", vbucks: 800, rarity: "Uncommon", emoji: "🌙", color: "from-blue-900 to-indigo-800", glow: "rgba(30,64,175,0.6)" },
-  { id: 28, name: "Solar Flare", vbucks: 2000, rarity: "Legendary", emoji: "🌞", color: "from-yellow-500 to-red-500", glow: "rgba(234,179,8,0.6)" },
-  { id: 29, name: "Venom Surge", vbucks: 1200, rarity: "Rare", emoji: "🐍", color: "from-green-600 to-lime-500", glow: "rgba(22,163,74,0.6)" },
-  { id: 30, name: "Arc Reactor", vbucks: 1500, rarity: "Epic", emoji: "⚛️", color: "from-cyan-400 to-blue-500", glow: "rgba(34,211,238,0.6)" },
-  { id: 31, name: "Chaos Nova", vbucks: 2000, rarity: "Legendary", emoji: "🌀", color: "from-indigo-600 to-purple-700", glow: "rgba(79,70,229,0.6)" },
-  { id: 32, name: "Prism Light", vbucks: 500, rarity: "Common", emoji: "🔆", color: "from-white/20 to-gray-400", glow: "rgba(255,255,255,0.4)" },
-  { id: 33, name: "Titan Rush", vbucks: 1200, rarity: "Rare", emoji: "🏃", color: "from-orange-400 to-yellow-500", glow: "rgba(251,146,60,0.6)" },
-  { id: 34, name: "Phantom Ops", vbucks: 1500, rarity: "Epic", emoji: "👁️", color: "from-violet-700 to-purple-900", glow: "rgba(109,40,217,0.6)" },
-  { id: 35, name: "Blizzard Fox", vbucks: 800, rarity: "Uncommon", emoji: "🦊", color: "from-orange-300 to-red-400", glow: "rgba(253,186,116,0.6)" },
-  { id: 36, name: "Galaxy Burst", vbucks: 2000, rarity: "Legendary", emoji: "🌠", color: "from-blue-600 to-purple-700", glow: "rgba(37,99,235,0.6)" },
+  { id: 1, name: "Donald Duck", vbucks: 1500, rarity: "Epic", emoji: "🦆", color: "from-blue-400 to-yellow-400", glow: "rgba(96,165,250,0.6)" },
+  { id: 2, name: "Naruto (Return)", vbucks: 1800, rarity: "Legendary", emoji: "🍥", color: "from-orange-400 to-yellow-500", glow: "rgba(251,146,60,0.6)" },
+  { id: 3, name: "Sung Jinwoo", vbucks: 2000, rarity: "Legendary", emoji: "⚔️", color: "from-purple-700 to-slate-900", glow: "rgba(109,40,217,0.6)" },
+  { id: 4, name: "Honkai Collab", vbucks: 2000, rarity: "Legendary", emoji: "✨", color: "from-pink-500 to-violet-600", glow: "rgba(236,72,153,0.6)" },
+  { id: 5, name: "Galactic Storm", vbucks: 2000, rarity: "Legendary", emoji: "🌌", color: "from-yellow-500 to-orange-500", glow: "rgba(251,191,36,0.6)" },
+  { id: 6, name: "Neon Rider", vbucks: 1500, rarity: "Epic", emoji: "⚡", color: "from-purple-500 to-violet-500", glow: "rgba(168,85,247,0.6)" },
+  { id: 7, name: "Ocean Surge", vbucks: 1200, rarity: "Rare", emoji: "🌊", color: "from-blue-500 to-cyan-500", glow: "rgba(59,130,246,0.6)" },
+  { id: 8, name: "Acid Dreams", vbucks: 800, rarity: "Uncommon", emoji: "🧪", color: "from-green-500 to-emerald-500", glow: "rgba(34,197,94,0.6)" },
+  { id: 9, name: "Phantom X", vbucks: 2000, rarity: "Legendary", emoji: "👻", color: "from-amber-500 to-yellow-500", glow: "rgba(245,158,11,0.6)" },
+  { id: 10, name: "Cyber Punk", vbucks: 1500, rarity: "Epic", emoji: "🤖", color: "from-pink-500 to-rose-500", glow: "rgba(236,72,153,0.6)" },
+  { id: 11, name: "Void Walker", vbucks: 1200, rarity: "Rare", emoji: "🕳️", color: "from-indigo-500 to-blue-500", glow: "rgba(99,102,241,0.6)" },
+  { id: 12, name: "Solar Strike", vbucks: 500, rarity: "Common", emoji: "☀️", color: "from-gray-500 to-slate-500", glow: "rgba(107,114,128,0.6)" },
+  { id: 13, name: "Storm Rider", vbucks: 2000, rarity: "Legendary", emoji: "⛈️", color: "from-yellow-500 to-amber-500", glow: "rgba(234,179,8,0.6)" },
+  { id: 14, name: "Pixel Bash", vbucks: 1500, rarity: "Epic", emoji: "🎮", color: "from-cyan-500 to-teal-500", glow: "rgba(6,182,212,0.6)" },
+  { id: 15, name: "Coral Knight", vbucks: 1200, rarity: "Rare", emoji: "🪸", color: "from-red-500 to-rose-500", glow: "rgba(239,68,68,0.6)" },
+  { id: 16, name: "Ghost Rider", vbucks: 800, rarity: "Uncommon", emoji: "💀", color: "from-slate-500 to-zinc-500", glow: "rgba(100,116,139,0.6)" },
+  { id: 17, name: "Dark Matter", vbucks: 2000, rarity: "Legendary", emoji: "🌑", color: "from-purple-600 to-black", glow: "rgba(147,51,234,0.6)" },
+  { id: 18, name: "Frost Nova", vbucks: 1500, rarity: "Epic", emoji: "❄️", color: "from-sky-400 to-blue-600", glow: "rgba(56,189,248,0.6)" },
+  { id: 19, name: "Blaze Runner", vbucks: 1200, rarity: "Rare", emoji: "🔥", color: "from-orange-500 to-red-600", glow: "rgba(249,115,22,0.6)" },
+  { id: 20, name: "Neon Shadow", vbucks: 800, rarity: "Uncommon", emoji: "🌃", color: "from-violet-500 to-purple-700", glow: "rgba(139,92,246,0.6)" },
+  { id: 21, name: "Crystal Core", vbucks: 2000, rarity: "Legendary", emoji: "💎", color: "from-teal-400 to-cyan-600", glow: "rgba(20,184,166,0.6)" },
+  { id: 22, name: "Thunder Bolt", vbucks: 1500, rarity: "Epic", emoji: "⚡", color: "from-yellow-400 to-amber-600", glow: "rgba(250,204,21,0.6)" },
+  { id: 23, name: "Star Chaser", vbucks: 1200, rarity: "Rare", emoji: "⭐", color: "from-fuchsia-500 to-pink-600", glow: "rgba(217,70,239,0.6)" },
+  { id: 24, name: "Iron Titan", vbucks: 500, rarity: "Common", emoji: "🤖", color: "from-gray-400 to-zinc-600", glow: "rgba(156,163,175,0.6)" },
+  { id: 25, name: "Lava King", vbucks: 2000, rarity: "Legendary", emoji: "🌋", color: "from-red-600 to-orange-700", glow: "rgba(220,38,38,0.6)" },
+  { id: 26, name: "Shadow Ops", vbucks: 1500, rarity: "Epic", emoji: "🥷", color: "from-gray-700 to-slate-900", glow: "rgba(55,65,81,0.6)" },
+  { id: 27, name: "Aqua Force", vbucks: 800, rarity: "Uncommon", emoji: "💧", color: "from-blue-400 to-teal-500", glow: "rgba(96,165,250,0.6)" },
+  { id: 28, name: "Hyper Nova", vbucks: 2000, rarity: "Legendary", emoji: "💥", color: "from-fuchsia-500 to-violet-600", glow: "rgba(192,38,211,0.6)" },
+  { id: 29, name: "Cryo Tech", vbucks: 1200, rarity: "Rare", emoji: "🧊", color: "from-sky-300 to-indigo-500", glow: "rgba(125,211,252,0.6)" },
+  { id: 30, name: "Ember Strike", vbucks: 1500, rarity: "Epic", emoji: "🔥", color: "from-amber-400 to-red-500", glow: "rgba(251,191,36,0.6)" },
+  { id: 31, name: "Midnight Ace", vbucks: 800, rarity: "Uncommon", emoji: "🌙", color: "from-blue-900 to-indigo-800", glow: "rgba(30,64,175,0.6)" },
+  { id: 32, name: "Solar Flare", vbucks: 2000, rarity: "Legendary", emoji: "🌞", color: "from-yellow-500 to-red-500", glow: "rgba(234,179,8,0.6)" },
+  { id: 33, name: "Venom Surge", vbucks: 1200, rarity: "Rare", emoji: "🐍", color: "from-green-600 to-lime-500", glow: "rgba(22,163,74,0.6)" },
+  { id: 34, name: "Arc Reactor", vbucks: 1500, rarity: "Epic", emoji: "⚛️", color: "from-cyan-400 to-blue-500", glow: "rgba(34,211,238,0.6)" },
+  { id: 35, name: "Chaos Nova", vbucks: 2000, rarity: "Legendary", emoji: "🌀", color: "from-indigo-600 to-purple-700", glow: "rgba(79,70,229,0.6)" },
+  { id: 36, name: "Prism Light", vbucks: 500, rarity: "Common", emoji: "🔆", color: "from-white/20 to-gray-400", glow: "rgba(255,255,255,0.4)" },
+  { id: 37, name: "Titan Rush", vbucks: 1200, rarity: "Rare", emoji: "🏃", color: "from-orange-400 to-yellow-500", glow: "rgba(251,146,60,0.6)" },
+  { id: 38, name: "Phantom Ops", vbucks: 1500, rarity: "Epic", emoji: "👁️", color: "from-violet-700 to-purple-900", glow: "rgba(109,40,217,0.6)" },
+  { id: 39, name: "Blizzard Fox", vbucks: 800, rarity: "Uncommon", emoji: "🦊", color: "from-orange-300 to-red-400", glow: "rgba(253,186,116,0.6)" },
+  { id: 40, name: "Galaxy Burst", vbucks: 2000, rarity: "Legendary", emoji: "🌠", color: "from-blue-600 to-purple-700", glow: "rgba(37,99,235,0.6)" },
 ];
 
 const PRO_PRODUCTS = [
@@ -77,7 +80,7 @@ const PRO_PRODUCTS = [
     price: "$4.99",
     period: "/month",
     description: "Full access to all FortNexus premium features",
-    features: ["Early Leaks 24h vor allen", "Ad-Free + AI Oracle unlimited", "Private Discord + Coaching"],
+    features: ["Early Leaks 24h vor allen", "Ad-Free • AI Oracle unlimited", "Private Discord mit Pros • Exklusive Wallpapers & Loadout Guides"],
     color: "from-purple-600 to-cyan-600",
     glow: "rgba(161,0,255,0.5)",
     popular: true,
@@ -270,7 +273,7 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-3 py-1">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs font-bold text-green-400">{onlineCount.toLocaleString()} online</span>
+            <span className="text-xs font-bold text-green-400">{onlineCount.toLocaleString()} online • Season endet in 2 Tagen!</span>
           </div>
 
           <motion.button
@@ -281,7 +284,7 @@ function Navbar({ onlineCount }: { onlineCount: number }) {
             whileTap={{ scale: 0.95 }}
           >
             <Star size={14} />
-            PRO $4.99
+            Werde PRO jetzt
           </motion.button>
 
           <button
@@ -379,8 +382,16 @@ function HeroSection() {
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
       >
-        🚌
+        🎡
       </motion.div>
+      <motion.p
+        className="text-sm font-black tracking-widest text-gray-400 uppercase z-10 mb-3"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        CHAPTER 7 • PACIFIC BREAK • 02.03.2026
+      </motion.p>
       <motion.h1
         className="text-6xl md:text-8xl font-black tracking-tighter z-10 mb-4"
         initial={{ opacity: 0, y: 40 }}
@@ -392,11 +403,11 @@ function HeroSection() {
           className="text-transparent bg-clip-text"
           style={{ backgroundImage: "linear-gradient(135deg, #A100FF, #00F5FF, #FF0099)" }}
         >
-          FORTNITE
+          CARNIVAL
         </span>
         <br />
-        <span className="text-white/90 text-3xl md:text-5xl tracking-tight font-black">
-          CARNIVAL 2026
+        <span className="text-white/90 text-5xl md:text-7xl tracking-tight font-black">
+          IS LIVE
         </span>
       </motion.h1>
       <motion.p
@@ -405,7 +416,7 @@ function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        Chapter 7 • Pacific Break | The Ultimate Worldwide Fortnite Hub 2026
+        Nur noch 2 Tage bis Season 2 – die Party läuft auf 200 %
       </motion.p>
       <motion.div
         className="flex flex-wrap items-center justify-center gap-4 z-10 mb-12"
@@ -420,7 +431,7 @@ function HeroSection() {
           whileHover={{ scale: 1.08, boxShadow: "0 0 40px rgba(161,0,255,0.7)" }}
           whileTap={{ scale: 0.96 }}
         >
-          SHOP JETZT EXPLODIEREN 💥
+          SHOP JETZT 💥
         </motion.button>
         <motion.a
           href="#live"
@@ -480,7 +491,7 @@ function LiveStreamsSection() {
         >
           <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
           <h2 className="text-3xl md:text-4xl font-black">
-            LIVE AUF TWITCH &amp; KICK – CARNIVAL STAGE
+            🔴 LIVE CARNIVAL STAGE
           </h2>
         </motion.div>
         <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
@@ -507,7 +518,7 @@ function LiveStreamsSection() {
               </div>
               <div className="p-4">
                 <p className="font-black text-white text-lg">{s.display}</p>
-                <p className="text-gray-400 text-sm mt-1">FNCS • Pacific Break</p>
+                <p className="text-gray-400 text-sm mt-1">{s.viewers} LIVE • {s.tag}</p>
                 <a
                   href={`https://twitch.tv/${s.channel}`}
                   target="_blank"
@@ -553,8 +564,8 @@ function ItemShopSection() {
           viewport={{ once: true }}
         >
           <div>
-            <h2 className="text-3xl md:text-4xl font-black">TODAY&apos;S CARNIVAL SHOP</h2>
-            <p className="text-gray-400 text-sm mt-1">01.03.2026 • Daily Rotation</p>
+            <h2 className="text-3xl md:text-4xl font-black">TODAY&apos;S ITEM SHOP • 02.03.2026</h2>
+            <p className="text-gray-400 text-sm mt-1">{SHOP_ITEMS.slice(0, 4).map((item) => item.name).join(" • ")} 🔥</p>
           </div>
           <div className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-yellow-500/40">
             <span className="text-yellow-400 text-xl">⚡</span>
@@ -905,8 +916,9 @@ function ProSection() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => handlePurchase(product.id, product.name)}
               >
-                JETZT PRO $4.99/MO – 7 Tage gratis
+                JETZT PRO – nur 4,99 €/Monat
               </motion.button>
+              <p className="text-center text-xs text-gray-500 mt-3">7 Tage gratis • Jederzeit kündbar • Stripe sicher</p>
             </motion.div>
           ))}
         </div>
