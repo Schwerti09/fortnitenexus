@@ -17,6 +17,7 @@
     "ai": "^6.0.105",
     "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.34.3",
+    "googleapis": "^171.4.0",
     "gsap": "^3.14.2",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
@@ -26,6 +27,7 @@
     "three": "^0.183.2"
   },
   "devDependencies": {
+    "@netlify/functions": "^5.1.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
